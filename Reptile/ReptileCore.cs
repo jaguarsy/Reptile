@@ -95,9 +95,9 @@ namespace Reptile
         //获取页码总数
         private int getPageCount(string html)
         {
-            regex = new Regex(@"class=""[Pp]{1}age[Ll]{1}ink""\s+title=""(\d+)""");
+            regex = new Regex(@"class=""[Pp]{1}age[Ll]{1}ink""[\s\S]*?title=""(\d+)""");
             var matches = regex.Matches(html);
-            if (matches.Count == 0) return 0;
+            if (matches.Count == 0) return 1;
             return int.Parse(matches[matches.Count - 1].Groups[1].Value);
         }
 
@@ -106,7 +106,7 @@ namespace Reptile
         {
             var result = new List<ShopEntity>();
             regex = new Regex(@"href=""/shop/(\d+)""\s+\>[\n\s]+\<h4\>([^\<]+)\</h4\>[\s\S]*?质量\<b\>([^\<]+)[\s\S]*?环境\<b\>([^\<]+)[\s\S]*?服务\<b\>([^\<]+)");
-            for (var i = 0; i < pageCount; i++)
+            for (var i = 1; i <= pageCount; i++)
             {
                 var html = getHtml(targetUrl + "p" + i);
                 var matches = regex.Matches(html);
@@ -135,6 +135,8 @@ namespace Reptile
                         Service = shop.ServiceScore
                     });
                 }
+
+                sleep();//停顿
             }
             return result;
         }
@@ -146,6 +148,7 @@ namespace Reptile
             var html = getHtml(string.Format(shopCommentTemplate, id, 1));
 
             var pageCount = getPageCount(html);
+            watcher.Log(pageCount.ToString());
 
             regex = new Regex(@"href=""(/member/\d+)""\s+user-id=""(\d+)""\s+class=""j_card""[\s\S]*?产品(\d{1})[\s\S]*?环境(\d{1})[\s\S]*?服务(\d{1})");
 
@@ -154,6 +157,7 @@ namespace Reptile
                 if (i > 1)
                     html = getHtml(string.Format(shopCommentTemplate, id, i));
                 var matches = regex.Matches(html);
+                
                 foreach (Match item in matches)
                 {
                     var comment = new CommentEntity()
@@ -180,6 +184,8 @@ namespace Reptile
                     if (user == null) continue;
                     watcher.Log(user.userID + " " + user.userName + " " + user.follows.Count + " " + user.fans.Count);
                 }
+
+                sleep();//停顿
             }
 
 
@@ -219,10 +225,11 @@ namespace Reptile
             var result = new List<string>();
 
             var html = getHtml(string.Format(urlTemplate, userid, 1));
+
             //获取页码数
             var pageCount = getUserPageCount(html);
 
-            for (var i = 1; i < pageCount; i++)
+            for (var i = 1; i <= pageCount; i++)
             {
                 if (i > 1)
                     html = getHtml(string.Format(urlTemplate, userid, i));
@@ -232,6 +239,8 @@ namespace Reptile
                 {
                     result.Add(item.Groups[1].Value);
                 }
+
+                sleep();//停顿
             }
 
             return result;
@@ -241,7 +250,7 @@ namespace Reptile
         {
             regex = new Regex(@"data-pg=""(\d+)""\>");
             var matches = regex.Matches(html);
-            if (matches.Count == 0) return 0;
+            if (matches.Count == 0) return 1;
             return int.Parse(matches[matches.Count - 1].Groups[1].Value);
         }
 
@@ -259,6 +268,13 @@ namespace Reptile
                     URL = url,
                     UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36"
                 }).Html;
+        }
+
+        //用于停顿一段随机的时间（2-10秒）
+        private Random rand = new Random();
+        private void sleep()
+        {
+            Thread.Sleep(rand.Next(2000, 5000));
         }
     }
 }
