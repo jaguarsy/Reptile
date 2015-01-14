@@ -12,9 +12,14 @@ namespace Reptile.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Follows
+    public partial class SHRoadIndex
     {
-        public string UserID { get; set; }
-        public string FollowID { get; set; }
+        public int ID { get; set; }
+        public string State { get; set; }
+        public string Name { get; set; }
+        public Nullable<decimal> CurrentIndex { get; set; }
+        public Nullable<decimal> ReferenceIndex { get; set; }
+        public Nullable<decimal> DValue { get; set; }
+        public Nullable<System.DateTime> Time { get; set; }
     }
 }

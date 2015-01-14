@@ -13,10 +13,10 @@ namespace Reptile.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class reptileEntities : DbContext
+    public partial class testEntities : DbContext
     {
-        public reptileEntities()
-            : base("name=reptileEntities")
+        public testEntities()
+            : base("name=testEntities")
         {
         }
     
@@ -25,10 +25,8 @@ namespace Reptile.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Comment> Comment { get; set; }
-        public virtual DbSet<Fans> Fans { get; set; }
-        public virtual DbSet<Follows> Follows { get; set; }
-        public virtual DbSet<Shop> Shop { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Packing> Packing { get; set; }
+        public virtual DbSet<SHRoadIndex> SHRoadIndex { get; set; }
     }
 }

@@ -12,9 +12,11 @@ namespace Reptile.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Packing
     {
-        public string UserID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
+        public Nullable<int> PackingSpace { get; set; }
+        public Nullable<System.DateTime> Time { get; set; }
     }
 }

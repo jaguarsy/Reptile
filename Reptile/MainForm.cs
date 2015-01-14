@@ -18,8 +18,8 @@ namespace Reptile
 
         private void btBegin_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbUrl.Text)) return;
-            reptile = new ReptileCore(tbUrl.Text);
+            //if (string.IsNullOrWhiteSpace(tbUrl.Text)) return;
+            reptile = new ReptileCore();
             reptile.Register(this);
             reptile.BeginCatch();
         }

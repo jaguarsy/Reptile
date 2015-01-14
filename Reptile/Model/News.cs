@@ -12,9 +12,11 @@ namespace Reptile.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Fans
+    public partial class News
     {
-        public string UserID { get; set; }
-        public string FanID { get; set; }
+        public int ID { get; set; }
+        public string RoadName { get; set; }
+        public string Detail { get; set; }
+        public Nullable<System.DateTime> Time { get; set; }
     }
 }

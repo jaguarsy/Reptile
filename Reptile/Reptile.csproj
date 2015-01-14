@@ -64,35 +64,29 @@
     <Compile Include="MainForm.func.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\Comment.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Fans.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Follows.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Model.Context.cs">
+    <Compile Include="Model\Models.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
+      <DependentUpon>Models.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model.cs">
+    <Compile Include="Model\Models.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model.Designer.cs">
+    <Compile Include="Model\Models.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Shop.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="Model\News.cs">
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\User.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="Model\Packing.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SHRoadIndex.cs">
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,22 +105,22 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <EntityDeploy Include="Model\Model.edmx">
+    <EntityDeploy Include="Model\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\Model.Context.tt">
+    <None Include="Model\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.Context.cs</LastGenOutput>
     </None>
-    <None Include="Model\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <None Include="Model\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
     </None>
-    <None Include="Model\Model.tt">
+    <None Include="Model\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
