@@ -10,6 +10,7 @@ namespace Reptile
         private const string logTemplate = "{0} - at {1}\n";
         private void update(string message)
         {
+            if (rtbLog.Lines.Length > 100) rtbLog.Clear();
             rtbLog.AppendText(string.Format(logTemplate, message, DateTime.Now.ToLongTimeString()));
             rtbLog.ScrollToCaret();
         }

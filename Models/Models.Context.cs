@@ -28,5 +28,6 @@ namespace Models
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Packing> Packing { get; set; }
         public virtual DbSet<SHRoadIndex> SHRoadIndex { get; set; }
+        public virtual DbSet<AMap> AMap { get; set; }
     }
 }

@@ -4,7 +4,21 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AMap">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="DelayIndex" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Speed" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TravelTime" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DelayTime" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="int" />
+        </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="ID" />
@@ -41,12 +55,12 @@
           <Property Name="Date" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="testModelStoreContainer">
+          <EntitySet Name="AMap" EntityType="Self.AMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Packing" EntityType="Self.Packing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SHRoadIndex" EntityType="Self.SHRoadIndex" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -89,7 +103,22 @@
           <EntitySet Name="News" EntityType="Self.News" />
           <EntitySet Name="Packing" EntityType="Self.Packing" />
           <EntitySet Name="SHRoadIndex" EntityType="Self.SHRoadIndex" />
+          <EntitySet Name="AMap" EntityType="testModel.AMap" />
         </EntityContainer>
+        <EntityType Name="AMap">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DelayIndex" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Speed" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TravelTime" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DelayTime" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -131,6 +160,21 @@
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AMap">
+            <EntityTypeMapping TypeName="testModel.AMap">
+              <MappingFragment StoreEntitySet="AMap">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DelayTime" ColumnName="DelayTime" />
+                <ScalarProperty Name="TravelTime" ColumnName="TravelTime" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="DelayIndex" ColumnName="DelayIndex" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

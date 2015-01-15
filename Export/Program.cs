@@ -92,6 +92,27 @@ namespace Export
             xfile.Close();
 
             log("导出完毕");
+
+            //4.高德地图
+            log("正在导出高德地图数据");
+            for (var i = 1; i <= 3; i++)
+            {
+                book = new HSSFWorkbook();
+
+                var amap = dbContext.AMap.Where(p => p.Type == i).Distinct().GroupBy(p => p.Name).ToList();
+                foreach (var item in amap)
+                {
+                    ISheet ampsheet = book.CreateSheet(item.Key);
+
+                    getsheet(ampsheet, item.ToList());
+                }
+
+                xfile = new FileStream(DateTime.Now.ToShortDateString() + "-高德" + i + ".xls", FileMode.Create, System.IO.FileAccess.Write);
+                book.Write(xfile);
+                xfile.Close();
+            }
+
+            log("导出完毕");
         }
 
         private static void log(string message)
@@ -149,12 +170,36 @@ namespace Export
             }
         }
 
-
         private static void getsheet(ISheet sheet, List<News> list)
         {
             // 第一行
             NPOI.SS.UserModel.IRow row = sheet.CreateRow(0);
             PropertyInfo[] props = typeof(News).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            for (var i = 0; i < props.Count(); i++)
+            {
+                row.CreateCell(i).SetCellValue(props[i].Name);
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                NPOI.SS.UserModel.IRow row2 = sheet.CreateRow(i + 1);
+                for (int j = 0; j < props.Count(); j++)
+                {
+                    var value = props[j].GetValue(list[i], null);
+                    if (value != null)
+                    {
+                        row2.CreateCell(j).SetCellValue(value.ToString());
+                    }
+                }
+            }
+        }
+
+        private static void getsheet(ISheet sheet, List<AMap> list)
+        {
+            // 第一行
+            NPOI.SS.UserModel.IRow row = sheet.CreateRow(0);
+            PropertyInfo[] props = typeof(AMap).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             for (var i = 0; i < props.Count(); i++)
             {
