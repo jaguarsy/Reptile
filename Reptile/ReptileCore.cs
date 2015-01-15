@@ -141,7 +141,7 @@ namespace Reptile
                     news.RoadName = home[i].Groups[2].Value;
                     news.Time = time.ToShortTimeString();
                     news.date = time.ToShortDateString();
-                    news.Detail = home[i + 2].Groups[2].Value;
+                    news.Detail = home[i].Groups[2].Value + " " + (home[i + 2].Groups[2].Value.Equals("22") ? "拥挤" : "阻塞");
                     news.RoadType = 1;
 
                     if (Exists(news)) continue;
@@ -174,7 +174,7 @@ namespace Reptile
                     var news = new News();
                     var time = DateTime.Parse(home[i + 2].Groups[2].Value);
                     news.RoadName = home[i].Groups[2].Value;
-                    news.Detail = home[i + 1].Groups[2].Value + " " + home[i + 3].Groups[2].Value;
+                    news.Detail = home[i + 1].Groups[2].Value + " " + (home[i + 3].Groups[2].Value.Equals("22") ? "拥挤" : "阻塞");
                     news.Time = time.ToShortTimeString();
                     news.date = time.ToShortDateString();
                     news.RoadType = 3;

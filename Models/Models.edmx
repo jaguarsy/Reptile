@@ -11,10 +11,10 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="DelayIndex" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Speed" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="TravelTime" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="DelayTime" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DelayIndex" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Speed" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TravelTime" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DelayTime" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Date" Type="nvarchar" MaxLength="50" />
           <Property Name="Time" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="int" />
@@ -47,9 +47,9 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="State" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="CurrentIndex" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ReferenceIndex" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="DValue" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CurrentIndex" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReferenceIndex" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DValue" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Time" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="int" />
           <Property Name="Date" Type="nvarchar" MaxLength="50" />
@@ -92,9 +92,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CurrentIndex" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ReferenceIndex" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="DValue" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CurrentIndex" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReferenceIndex" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DValue" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" />
           <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -111,10 +111,10 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DelayIndex" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Speed" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="TravelTime" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="DelayTime" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DelayIndex" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Speed" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TravelTime" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DelayTime" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" />
