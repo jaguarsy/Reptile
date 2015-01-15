@@ -15,7 +15,9 @@ namespace Export
     {
         static void Main(string[] args)
         {
+            string[] amapName = { "全部道路", "快速高速道路", "普通道路" };
             testEntities dbContext = new testEntities();
+            FileStream xfile;
 
             //1.城市快速路
             log("正在导出上海交通出行网城市快速路数据");
@@ -35,7 +37,7 @@ namespace Export
                     getsheet(sheet, list);
                 }
             }
-            FileStream xfile = new FileStream(DateTime.Now.ToShortDateString() + "-城市快速路.xls", FileMode.Create, System.IO.FileAccess.Write);
+            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-城市快速路.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
             xfile.Close();
 
@@ -57,7 +59,7 @@ namespace Export
                     getsheet(sheet, list);
                 }
             }
-            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-地面道路.xls", FileMode.Create, System.IO.FileAccess.Write);
+            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-地面道路.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
             xfile.Close();
 
@@ -72,7 +74,7 @@ namespace Export
             var packingsheet = book.CreateSheet("停车位");
             getsheet(packingsheet, packing);
 
-            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-停车位.xls", FileMode.Create, System.IO.FileAccess.Write);
+            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-停车位.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
             xfile.Close();
 
@@ -87,7 +89,7 @@ namespace Export
 
             getsheet(newssheet, news);
 
-            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-道路实况.xls", FileMode.Create, System.IO.FileAccess.Write);
+            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-道路实况.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
             xfile.Close();
 
@@ -107,7 +109,7 @@ namespace Export
                     getsheet(ampsheet, item.ToList());
                 }
 
-                xfile = new FileStream(DateTime.Now.ToShortDateString() + "-高德" + i + ".xls", FileMode.Create, System.IO.FileAccess.Write);
+                xfile = new FileStream(DateTime.Now.ToShortDateString() + "-高德-" + amapName[i - 1] + ".xls", FileMode.Create, System.IO.FileAccess.Write);
                 book.Write(xfile);
                 xfile.Close();
             }
