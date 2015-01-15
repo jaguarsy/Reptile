@@ -65,56 +65,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="News.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Packing.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SHRoadIndex.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Models.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Models.edmx</DependentUpon>
-      <LastGenOutput>Models.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </None>
-    <None Include="Models.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Models.edmx</DependentUpon>
-      <LastGenOutput>Models.cs</LastGenOutput>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{757fe8da-61ad-4b79-aacc-3a70d56b2d69}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

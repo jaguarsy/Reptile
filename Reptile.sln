@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reptile", "Reptile\Reptile.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Export", "Export\Export.csproj", "{F16EBC72-5940-4BBA-94E5-A4005E2757FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{757FE8DA-61AD-4B79-AACC-3A70D56B2D69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F16EBC72-5940-4BBA-94E5-A4005E2757FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F16EBC72-5940-4BBA-94E5-A4005E2757FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F16EBC72-5940-4BBA-94E5-A4005E2757FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{757FE8DA-61AD-4B79-AACC-3A70D56B2D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{757FE8DA-61AD-4B79-AACC-3A70D56B2D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{757FE8DA-61AD-4B79-AACC-3A70D56B2D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{757FE8DA-61AD-4B79-AACC-3A70D56B2D69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿using Reptile.Entity;
 using Reptile.Interface;
-using Reptile.Model;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -82,9 +82,9 @@ namespace Reptile
 
             while (true)
             {
-                foreach (var str in shroad)
+                for (var i = 0; i < 2; i++)
                 {
-                    html = getHtml(str);
+                    html = getHtml(shroad[i]);
                     watcher.Log("获取当前时间");
                     var time = regexTime.Match(html);
                     var tmpTime = DateTime.Parse(time.Groups[1].Value);
@@ -106,7 +106,9 @@ namespace Reptile
                         road.CurrentIndex = decimal.Parse(item.Groups[3].Value.Trim());
                         road.ReferenceIndex = decimal.Parse(item.Groups[4].Value.Trim());
                         road.DValue = decimal.Parse(item.Groups[5].Value.Trim());
-                        road.Time = currentTime;
+                        road.Date = currentTime.ToShortDateString();
+                        road.Time = currentTime.ToShortTimeString();
+                        road.Type = i;
                         dbContext.SHRoadIndex.Add(road);
                         watcher.Log(road.State + "," + road.Name + "," + road.CurrentIndex + "," +
                             road.ReferenceIndex + "," + road.DValue + "," + road.Time.ToString());
@@ -122,9 +124,10 @@ namespace Reptile
                     {
                         Name = home[i].Groups[2].Value,
                         PackingSpace = int.Parse(home[i + 1].Groups[2].Value),
-                        Time = DateTime.Now
+                        Time = DateTime.Now.ToShortTimeString(),
+                        date = DateTime.Now.ToShortDateString()
                     };
-                    watcher.Log(packing.Name + "," + packing.PackingSpace + "," + packing.Time.Value.ToString());
+                    watcher.Log(packing.Name + "," + packing.PackingSpace + "," + packing.Time);
                     dbContext.Packing.Add(packing);
                 }
 
@@ -134,12 +137,15 @@ namespace Reptile
                 for (var i = 0; i < home.Count; i += 3)
                 {
                     var news = new News();
+                    var time = DateTime.Parse(home[i + 1].Groups[2].Value);
                     news.RoadName = home[i].Groups[2].Value;
-                    news.Time = DateTime.Parse(home[i + 1].Groups[2].Value);
+                    news.Time = time.ToShortTimeString();
+                    news.date = time.ToShortDateString();
                     news.Detail = home[i + 2].Groups[2].Value;
+                    news.RoadType = 1;
 
                     if (Exists(news)) continue;
-                    watcher.Log(news.RoadName + "," + news.Detail + "," + news.Time.Value.ToString());
+                    watcher.Log(news.RoadName + "," + news.Detail + "," + news.Time);
                     dbContext.News.Add(news);
                 }
 
@@ -149,11 +155,14 @@ namespace Reptile
                 for (var i = 0; i < home.Count; i += 2)
                 {
                     var news = new News();
-                    news.Time = DateTime.Parse(home[i].Groups[2].Value);
+                    var time = DateTime.Parse(home[i].Groups[2].Value);
+                    news.Time = time.ToShortTimeString();
+                    news.date = time.ToShortDateString();
                     news.Detail = home[i + 1].Groups[2].Value;
+                    news.RoadType = 2;
 
                     if (Exists(news)) continue;
-                    watcher.Log(news.RoadName + "," + news.Detail + "," + news.Time.Value.ToString());
+                    watcher.Log(news.RoadName + "," + news.Detail + "," + news.Time);
                     dbContext.News.Add(news);
                 }
 
@@ -163,12 +172,15 @@ namespace Reptile
                 for (var i = 0; i < home.Count; i += 4)
                 {
                     var news = new News();
+                    var time = DateTime.Parse(home[i + 2].Groups[2].Value);
                     news.RoadName = home[i].Groups[2].Value;
                     news.Detail = home[i + 1].Groups[2].Value + " " + home[i + 3].Groups[2].Value;
-                    news.Time = DateTime.Parse(home[i + 2].Groups[2].Value);
+                    news.Time = time.ToShortTimeString();
+                    news.date = time.ToShortDateString();
+                    news.RoadType = 3;
 
                     if (Exists(news)) continue;
-                    watcher.Log(news.RoadName + "," + news.Detail + "," + news.Time.Value.ToString());
+                    watcher.Log(news.RoadName + "," + news.Detail + "," + news.Time);
                     dbContext.News.Add(news);
                 }
                 //写入数据库
