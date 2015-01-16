@@ -191,9 +191,6 @@ namespace Reptile
                     {
                         watcher.Log("当前更新时间为：" + aMapCurrentTime.ToString());
                         getData(html);
-                        watcher.Log("保存到数据库");
-                        save();
-                        watcher.Log("保存成功");
                     }
                     else
                     {
