@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Models.ExcelEntities;
 
 namespace Export
 {
@@ -16,6 +17,7 @@ namespace Export
         static void Main(string[] args)
         {
             string[] amapName = { "全部道路", "快速高速道路", "普通道路" };
+            string[] shNews = { "城市快速路", "干线公路", "地面道路" };
             testEntities dbContext = new testEntities();
             FileStream xfile;
 
@@ -24,9 +26,22 @@ namespace Export
 
             HSSFWorkbook book = new HSSFWorkbook();
 
-            var today = DateTime.Now.ToShortDateString();
-            var result = dbContext.SHRoadIndex.Where(p => p.Date.Equals(today) && p.Type == 0).Distinct()
-                .GroupBy(p => p.Name).ToList();
+            var today = DateTime.Now.AddDays(-1).ToShortDateString();
+            var result = dbContext.SHRoadIndex
+                .Where(p => p.Date.Equals(today) && p.Type == 0)
+                .Select(p => new SHRoadEntity()
+                {
+                    Name = p.Name,
+                    CurrentIndex = p.CurrentIndex,
+                    Date = p.Date,
+                    DValue = p.DValue,
+                    ReferenceIndex = p.ReferenceIndex,
+                    State = p.State,
+                    Time = p.Time
+                })
+                .Distinct()
+                .OrderBy(p => p.Time)
+                .GroupBy(p => p.Name);
 
             foreach (var item in result)
             {
@@ -47,13 +62,26 @@ namespace Export
             log("正在导出上海交通出行网地面道路数据");
             book = new HSSFWorkbook();
 
-            result = dbContext.SHRoadIndex.Where(p => p.Date.Equals(today) && p.Type == 1).Distinct()
-                .GroupBy(p => p.Name).ToList();
+            result = dbContext.SHRoadIndex
+                .Where(p => p.Date.Equals(today) && p.Type == 1)
+                .Select(p => new SHRoadEntity()
+                {
+                    Name = p.Name,
+                    CurrentIndex = p.CurrentIndex,
+                    Date = p.Date,
+                    DValue = p.DValue,
+                    ReferenceIndex = p.ReferenceIndex,
+                    State = p.State,
+                    Time = p.Time
+                })
+                .Distinct()
+                .OrderBy(p => p.Time)
+                .GroupBy(p => p.Name);
 
             foreach (var item in result)
             {
                 ISheet sheet = book.CreateSheet(item.Key.Replace("*", ""));
-                var list = item.ToList();
+                var list = item.OrderBy(p => p.Time).ToList();
                 for (var i = 0; i < list.Count; i++)
                 {
                     getsheet(sheet, list);
@@ -69,10 +97,16 @@ namespace Export
             log("正在导出上海交通出行网停车位数据");
             book = new HSSFWorkbook();
 
-            var packing = dbContext.Packing.Distinct().ToList();
+            var packing = dbContext.Packing
+                .Where(p => p.date.Equals(today))
+                .OrderBy(p => p.Time)
+                .GroupBy(p => p.Name);
 
-            var packingsheet = book.CreateSheet("停车位");
-            getsheet(packingsheet, packing);
+            foreach (var item in packing)
+            {
+                var packingsheet = book.CreateSheet(item.Key);
+                getsheet(packingsheet, item.ToList());
+            }
 
             xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-停车位.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
@@ -84,10 +118,17 @@ namespace Export
             log("正在导出上海交通出行网道路实况");
             book = new HSSFWorkbook();
 
-            var news = dbContext.News.Distinct().ToList();
-            ISheet newssheet = book.CreateSheet("道路实况");
+            var news = dbContext.News
+                .Where(p => p.date.Equals(today))
+                .OrderBy(p => p.Time)
+                .GroupBy(p => p.RoadType);
 
-            getsheet(newssheet, news);
+            foreach (var item in news)
+            {
+                var newssheet = book.CreateSheet(shNews[item.Key.Value - 1]);
+
+                getsheet(newssheet, item.ToList());
+            }
 
             xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-道路实况.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
@@ -101,7 +142,9 @@ namespace Export
             {
                 book = new HSSFWorkbook();
 
-                var amap = dbContext.AMap.Where(p => p.Type == i).Distinct().GroupBy(p => p.Name).ToList();
+                var amap = dbContext.AMap
+                    .Where(p => p.Date.Equals(today) && p.Type == i)
+                    .GroupBy(p => p.Name);
                 foreach (var item in amap)
                 {
                     ISheet ampsheet = book.CreateSheet(item.Key);
@@ -122,11 +165,11 @@ namespace Export
             Console.WriteLine(message);
         }
 
-        private static void getsheet(ISheet sheet, List<SHRoadIndex> list)
+        private static void getsheet(ISheet sheet, List<SHRoadEntity> list)
         {
             // 第一行
             NPOI.SS.UserModel.IRow row = sheet.CreateRow(0);
-            PropertyInfo[] props = typeof(SHRoadIndex).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo[] props = typeof(SHRoadEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             for (var i = 0; i < props.Count(); i++)
             {

@@ -51,6 +51,7 @@
     <Compile Include="AMap.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="ExcelEntities\SHRoadEntity.cs" />
     <Compile Include="Models.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
