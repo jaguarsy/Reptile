@@ -135,7 +135,7 @@ namespace Reptile
                     for (var i = 0; i < home.Count; i += 3)
                     {
                         var news = new News();
-                        var time = DateTime.Parse(home[i + 1].Groups[2].Value);
+                        var time = DateTime.Parse(home[i + 1].Groups[2].Value.Replace(",", ""));
                         news.RoadName = home[i].Groups[2].Value;
                         news.Time = time.ToShortTimeString();
                         news.date = time.ToShortDateString();
@@ -153,7 +153,11 @@ namespace Reptile
                     for (var i = 0; i < home.Count; i += 2)
                     {
                         var news = new News();
-                        var time = DateTime.Parse(home[i].Groups[2].Value);
+                        DateTime time;
+                        if (!DateTime.TryParse(home[i].Groups[2].Value, out time))
+                        {
+                            time = DateTime.Now;
+                        }
                         news.Time = time.ToShortTimeString();
                         news.date = time.ToShortDateString();
                         news.Detail = home[i + 1].Groups[2].Value;
@@ -207,9 +211,9 @@ namespace Reptile
                     sleep();
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    watcher.Log("出现异常，等待两分钟");
+                    watcher.Log("出现异常:" + ex.Message + "，等待两分钟");
                     GC.Collect();
                     sleep();
                     continue;

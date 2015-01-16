@@ -52,7 +52,7 @@ namespace Export
                     getsheet(sheet, list);
                 }
             }
-            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-城市快速路.xls", FileMode.Create, System.IO.FileAccess.Write);
+            xfile = new FileStream(DateTime.Now.ToString("yyyyMMdd") + "-上海交通出行网-城市快速路.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
             xfile.Close();
 
@@ -87,7 +87,7 @@ namespace Export
                     getsheet(sheet, list);
                 }
             }
-            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-地面道路.xls", FileMode.Create, System.IO.FileAccess.Write);
+            xfile = new FileStream(DateTime.Now.ToString("yyyyMMdd") + "-上海交通出行网-地面道路.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
             xfile.Close();
 
@@ -108,7 +108,7 @@ namespace Export
                 getsheet(packingsheet, item.ToList());
             }
 
-            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-停车位.xls", FileMode.Create, System.IO.FileAccess.Write);
+            xfile = new FileStream(DateTime.Now.ToString("yyyyMMdd") + "-上海交通出行网-停车位.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
             xfile.Close();
 
@@ -130,7 +130,7 @@ namespace Export
                 getsheet(newssheet, item.ToList());
             }
 
-            xfile = new FileStream(DateTime.Now.ToShortDateString() + "-上海交通出行网-道路实况.xls", FileMode.Create, System.IO.FileAccess.Write);
+            xfile = new FileStream(DateTime.Now.ToString("yyyyMMdd") + "-上海交通出行网-道路实况.xls", FileMode.Create, System.IO.FileAccess.Write);
             book.Write(xfile);
             xfile.Close();
 
@@ -152,7 +152,7 @@ namespace Export
                     getsheet(ampsheet, item.ToList());
                 }
 
-                xfile = new FileStream(DateTime.Now.ToShortDateString() + "-高德-" + amapName[i - 1] + ".xls", FileMode.Create, System.IO.FileAccess.Write);
+                xfile = new FileStream(DateTime.Now.ToString("yyyyMMdd") + "-高德-" + amapName[i - 1] + ".xls", FileMode.Create, System.IO.FileAccess.Write);
                 book.Write(xfile);
                 xfile.Close();
             }
